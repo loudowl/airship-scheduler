@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airship Post Scheduler</title>
+</head>
+<body>
+  <h1>Schedule an Airship Post</h1>
+  <form action="/schedule" method="POST">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br><br>
+
+    <label for="body">Body:</label><br>
+    <textarea id="body" name="body" required></textarea><br><br>
+
+    <label for="imageUrl">Image URL:</label><br>
+    <input type="text" id="imageUrl" name="imageUrl"><br><br>
+
+    <label for="link">Link:</label><br>
+    <input type="text" id="link" name="link"><br><br>
+
+    <label for="isVideo">Is this a video?</label>
+    <input type="checkbox" id="isVideo" name="isVideo"><br><br>
+
+    <label for="dateTime">Date and Time to Send:</label><br>
+    <input type="datetime-local" id="dateTime" name="dateTime" required><br><br>
+
+    <button type="submit">Schedule Post</button>
+  </form>
+
+  <h2>Scheduled Posts</h2>
+  <ul>
+    <% posts.forEach(function(post) { %>
+      <li>
+        <strong>Title:</strong> <%= post.title %> <br>
+        <strong>Body:</strong> <%= post.body %> <br>
+        <strong>Link:</strong> <a href="<%= post.link %>"><%= post.link %></a> <br>
+        <strong>Is Video:</strong> <%= post.isVideo ? 'Yes' : 'No' %> <br>
+        <strong>Date & Time:</strong> <%= post.dateTime %> <br>
+        <input type="checkbox" disabled <%= post.sent ? 'checked' : '' %>> Sent
+      </li>
+      <hr>
+    <% }); %>
+  </ul>
+</body>
+</html>
